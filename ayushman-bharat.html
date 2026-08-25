@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayushman Bharat - PM-JAY - Nexus Healthcare</title>
+    <meta name="description" content="Understanding Ayushman Bharat - PM-JAY, India's public health coverage scheme.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .ab-hero {
+            background: linear-gradient(135deg, #0B3B6B 0%, #1A6FA0 100%);
+            color: #FFFFFF;
+            padding: 60px 0 80px;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
+        }
+
+        .ab-hero h1 {
+            color: #FFFFFF;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+        }
+
+        .ab-hero .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 8px;
+        }
+
+        .ab-hero .ab-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+
+        .info-card .info-icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .info-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .infographic-section {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .infographic-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .infographic-step {
+            background: var(--bg-white);
+            padding: 20px 24px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            min-width: 140px;
+            border-top: 4px solid var(--accent-teal);
+        }
+
+        .infographic-step .step-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .infographic-step .step-label {
+            font-weight: 600;
+            color: var(--primary-navy);
+            font-size: 0.9rem;
+        }
+
+        .infographic-step .step-desc {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .infographic-arrow {
+            font-size: 1.8rem;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .amount-section {
+            background: #E3F2FD;
+            padding: 30px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--accent-teal);
+            margin-bottom: 40px;
+        }
+
+        .amount-section h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+
+        .amount-section p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .amount-section .highlight {
+            color: var(--accent-teal);
+            font-weight: 800;
+            font-size: 1.6rem;
+        }
+
+        .official-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .official-links .btn-official {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-official-primary {
+            background: linear-gradient(135deg, var(--primary-navy), var(--primary-blue));
+            color: #FFFFFF;
+        }
+
+        .btn-official-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-official-secondary {
+            border: 2px solid var(--primary-navy);
+            color: var(--primary-navy);
+            background: transparent;
+        }
+
+        .btn-official-secondary:hover {
+            background: var(--primary-navy);
+            color: #FFFFFF;
+        }
+
+        .eligibility-box {
+            background: #FFF8E1;
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid #FFC107;
+            margin: 20px 0;
+        }
+
+        .eligibility-box p {
+            color: #6D4C00;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .eligibility-box strong {
+            color: #4A2E00;
+        }
+
+        @media (max-width: 768px) {
+            .infographic-steps {
+                flex-direction: column;
+            }
+
+            .infographic-arrow {
+                transform: rotate(90deg);
+            }
+
+            .ab-hero {
+                padding: 40px 20px 60px;
+            }
+
+            .official-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .official-links .btn-official {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html" class="active">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./contact.html" class="btn-nav-cta">Get Healthcare Help</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="ab-hero">
+        <div class="container">
+            <span class="ab-tag">🇮🇳 India's Public Health Coverage Scheme</span>
+            <h1>Ayushman Bharat — PM-JAY</h1>
+            <p class="subtitle">"Understanding India's Public Health Coverage Scheme"</p>
+        </div>
+    </section>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <section class="ab-content">
+        <div class="container">
+
+            <!-- Overview -->
+            <div class="amount-section">
+                <h3>🏥 What is PM-JAY?</h3>
+                <p>PM-JAY provides eligible families with health cover of up to <span class="highlight">₹5 lakh</span> per family per year for eligible secondary and tertiary hospitalization, subject to scheme rules.</p>
+                <p style="margin-top: 8px;"><strong>⚠️ Important:</strong> This is health coverage, not cash. Eligible families can receive coverage for eligible hospitalization expenses at empanelled hospitals.</p>
+            </div>
+
+            <!-- Infographic -->
+            <div class="infographic-section">
+                <h3 style="color: var(--primary-navy);">How It Works</h3>
+                <p style="color: var(--text-muted);">Understanding the flow of Ayushman Bharat — PM-JAY</p>
+                <div class="infographic-steps">
+                    <div class="infographic-step">
+                        <span class="step-icon">👨‍👩‍👧‍👦</span>
+                        <span class="step-label">Eligible Family</span>
+                        <span class="step-desc">Family identified as per criteria</span>
+                    </div>
+                    <span class="infographic-arrow">➜</span>
+                    <div class="infographic-step">
+                        <span class="step-icon">🏥</span>
+                        <span class="step-label">Empanelled Hospital</span>
+                        <span class="step-desc">Hospital registered with scheme</span>
+                    </div>
+                    <span class="infographic-arrow">➜</span>
+                    <div class="infographic-step">
+                        <span class="step-icon">💊</span>
+                        <span class="step-label">Eligible Treatment</span>
+                        <span class="step-desc">Treatment covered as per rules</span>
+                    </div>
+                    <span class="infographic-arrow">➜</span>
+                    <div class="infographic-step">
+                        <span class="step-icon">🛡️</span>
+                        <span class="step-label">Scheme Coverage</span>
+                        <span class="step-desc">Coverage for eligible expenses</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Grid -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <span class="info-icon">📋</span>
+                    <h3>What is PM-JAY?</h3>
+                    <p>The Pradhan Mantri Jan Arogya Yojana (PM-JAY) is a component of Ayushman Bharat, India's public health coverage scheme. It provides coverage for eligible families for secondary and tertiary hospitalization.</p>
+                </div>
+                <div class="info-card">
+                    <span class="info-icon">💰</span>
+                    <h3>What Does ₹5 Lakh Mean?</h3>
+                    <p>It means eligible families can receive health coverage up to ₹5 lakh per family per year for eligible hospitalization expenses at empanelled hospitals. It is not cash deposited into a bank account.</p>
+                </div>
+                <div class="info-card">
+                    <span class="info-icon">👨‍👩‍👧‍👦</span>
+                    <h3>Who May Be Eligible?</h3>
+                    <p>Eligibility is determined by government-defined criteria. Families are identified based on specific parameters. Always check official sources for current eligibility information.</p>
+                </div>
+                <div class="info-card">
+                    <span class="info-icon">📍</span>
+                    <h3>Where Can People Get Help?</h3>
+                    <p>Care is available at empanelled hospitals, government healthcare facilities, and through official PM-JAY resources and authorized help channels.</p>
+                </div>
+            </div>
+
+            <!-- Eligibility Box -->
+            <div class="eligibility-box">
+                <p><strong>⚠️ Important:</strong> Eligibility, benefits, hospital availability and scheme rules may change. Always verify current information through official government sources.</p>
+            </div>
+
+            <!-- Official Links -->
+            <div style="text-align: center; margin: 40px 0;">
+                <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Official Resources</h3>
+                <div class="official-links">
+                    <a href="https://www.pmjay.gov.in/" target="_blank" class="btn-official btn-official-primary">🌐 Visit Official PM-JAY Website</a>
+                    <a href="https://www.pmjay.gov.in/check-eligibility" target="_blank" class="btn-official btn-official-secondary">✅ Check Official Information</a>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 12px;">These links point to official Government of India sources.</p>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer-box" style="margin: 40px 0;">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <h3>Important Disclaimer</h3>
+                    <p>Eligibility, benefits, hospital availability and scheme rules may change. Always verify current information through official government sources. This website provides educational information only.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Want to Learn More About Healthcare?</h2>
+                <p>Explore our Health Library and Government Schemes pages for more information.</p>
+                <div class="cta-buttons">
+                    <a href="./health-library.html" class="btn-primary">Visit Health Library</a>
+                    <a href="./government-schemes.html" class="btn-secondary-outline">Explore Schemes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP BUTTON ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="./assets/js/main.js"></script>
+</body>
+      </html>
