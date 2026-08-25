@@ -1,1 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Healthcare - Connecting People to Better Healthcare</title>
+    <meta name="description" content="Accessible healthcare information, awareness and community-focused healthcare resources.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
 
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html" class="active">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./contact.html" class="btn-nav-cta">Get Healthcare Help</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">🌟 Empowering Health Awareness</div>
+                    <h1 class="hero-title">Nexus Healthcare</h1>
+                    <p class="hero-tagline">"Connecting People to Better Healthcare."</p>
+                    <p class="hero-description">Accessible healthcare information, awareness and community-focused healthcare resources designed to help people make better-informed health decisions.</p>
+                    <div class="hero-buttons">
+                        <a href="./services.html" class="btn-primary">Explore Healthcare</a>
+                        <a href="./emergency.html" class="btn-secondary">Find Help</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="50">0</span>
+                            <span class="stat-label">+ Health Topics</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="10">0</span>
+                            <span class="stat-label">+ Service Areas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="100">0</span>
+                            <span class="stat-label">% Free Resources</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-illustration">
+                        <svg viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Network nodes -->
+                            <circle cx="250" cy="200" r="80" fill="#0B3B6B" opacity="0.08"/>
+                            <circle cx="250" cy="200" r="50" fill="#0B3B6B" opacity="0.12"/>
+                            <circle cx="250" cy="200" r="30" fill="#00B4D8" opacity="0.15"/>
+                            <circle cx="250" cy="200" r="15" fill="#00B4D8" opacity="0.3"/>
+                            
+                            <!-- Connecting lines -->
+                            <line x1="150" y1="120" x2="250" y2="200" stroke="#00B4D8" stroke-width="2" opacity="0.3"/>
+                            <line x1="350" y1="120" x2="250" y2="200" stroke="#00B4D8" stroke-width="2" opacity="0.3"/>
+                            <line x1="150" y1="280" x2="250" y2="200" stroke="#00B4D8" stroke-width="2" opacity="0.3"/>
+                            <line x1="350" y1="280" x2="250" y2="200" stroke="#00B4D8" stroke-width="2" opacity="0.3"/>
+                            <line x1="120" y1="200" x2="250" y2="200" stroke="#00B4D8" stroke-width="2" opacity="0.3"/>
+                            <line x1="380" y1="200" x2="250" y2="200" stroke="#00B4D8" stroke-width="2" opacity="0.3"/>
+                            <line x1="180" y1="150" x2="320" y2="250" stroke="#00B4D8" stroke-width="2" opacity="0.2"/>
+                            <line x1="320" y1="150" x2="180" y2="250" stroke="#00B4D8" stroke-width="2" opacity="0.2"/>
+                            
+                            <!-- Outer nodes -->
+                            <circle cx="150" cy="120" r="25" fill="#0B3B6B" opacity="0.1"/>
+                            <circle cx="150" cy="120" r="12" fill="#00B4D8" opacity="0.4"/>
+                            <circle cx="150" cy="120" r="6" fill="#FFFFFF" stroke="#00B4D8" stroke-width="2"/>
+                            
+                            <circle cx="350" cy="120" r="25" fill="#0B3B6B" opacity="0.1"/>
+                            <circle cx="350" cy="120" r="12" fill="#00B4D8" opacity="0.4"/>
+                            <circle cx="350" cy="120" r="6" fill="#FFFFFF" stroke="#00B4D8" stroke-width="2"/>
+                            
+                            <circle cx="150" cy="280" r="25" fill="#0B3B6B" opacity="0.1"/>
+                            <circle cx="150" cy="280" r="12" fill="#00B4D8" opacity="0.4"/>
+                            <circle cx="150" cy="280" r="6" fill="#FFFFFF" stroke="#00B4D8" stroke-width="2"/>
+                            
+                            <circle cx="350" cy="280" r="25" fill="#0B3B6B" opacity="0.1"/>
+                            <circle cx="350" cy="280" r="12" fill="#00B4D8" opacity="0.4"/>
+                            <circle cx="350" cy="280" r="6" fill="#FFFFFF" stroke="#00B4D8" stroke-width="2"/>
+                            
+                            <circle cx="120" cy="200" r="25" fill="#0B3B6B" opacity="0.1"/>
+                            <circle cx="120" cy="200" r="12" fill="#00B4D8" opacity="0.4"/>
+                            <circle cx="120" cy="200" r="6" fill="#FFFFFF" stroke="#00B4D8" stroke-width="2"/>
+                            
+                            <circle cx="380" cy="200" r="25" fill="#0B3B6B" opacity="0.1"/>
+                            <circle cx="380" cy="200" r="12" fill="#00B4D8" opacity="0.4"/>
+                            <circle cx="380" cy="200" r="6" fill="#FFFFFF" stroke="#00B4D8" stroke-width="2"/>
+                            
+                            <!-- Health cross -->
+                            <rect x="242" y="185" width="16" height="30" fill="#00B4D8" rx="2"/>
+                            <rect x="235" y="192" width="30" height="16" fill="#00B4D8" rx="2"/>
+                            
+                            <!-- Pulses -->
+                            <circle cx="200" cy="160" r="4" fill="#00B4D8" opacity="0.3">
+                                <animate attributeName="r" from="4" to="12" dur="2s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" from="0.3" to="0" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="300" cy="160" r="4" fill="#00B4D8" opacity="0.3">
+                                <animate attributeName="r" from="4" to="12" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" from="0.3" to="0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="250" cy="250" r="4" fill="#00B4D8" opacity="0.3">
+                                <animate attributeName="r" from="4" to="12" dur="2s" begin="1s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" from="0.3" to="0" dur="2s" begin="1s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,50 C360,100 720,0 1080,50 C1260,75 1380,60 1440,50 L1440,100 L0,100 Z" fill="#FFFFFF"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ==================== WHY NEXUS SECTION ==================== -->
+    <section class="why-nexus">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Why Nexus Healthcare</span>
+                <h2>Building a Healthier Future, Together</h2>
+                <p>We believe healthcare awareness should be accessible to everyone, regardless of location or background.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Health Awareness</h3>
+                    <p>Reliable, easy-to-understand health information to help you make informed decisions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Preventive Care</h3>
+                    <p>Resources and guidance to help prevent illness and maintain long-term wellness.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚑</div>
+                    <h3>Emergency Guidance</h3>
+                    <p>Educational first aid awareness and guidance for urgent health situations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3>Rural Healthcare Support</h3>
+                    <p>Connecting remote communities with healthcare information and resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HEALTH TOPICS SECTION ==================== -->
+    <section class="health-topics">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Featured Topics</span>
+                <h2>Healthcare Topics You Should Know</h2>
+                <p>Explore essential health topics that can help you and your family stay healthy and informed.</p>
+            </div>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-icon">🥗</div>
+                    <h3>Nutrition</h3>
+                    <p>Understanding balanced diets, essential nutrients, and healthy eating habits.</p>
+                    <a href="./health-library.html" class="topic-link">Learn More →</a>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">🏃</div>
+                    <h3>Preventive Care</h3>
+                    <p>Regular checkups, screenings, and lifestyle choices for better health outcomes.</p>
+                    <a href="./health-library.html" class="topic-link">Learn More →</a>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">❤️</div>
+                    <h3>Heart Health</h3>
+                    <p>Understanding cardiovascular health, risk factors, and preventive measures.</p>
+                    <a href="./health-library.html" class="topic-link">Learn More →</a>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">🩸</div>
+                    <h3>Diabetes Awareness</h3>
+                    <p>Recognizing symptoms, understanding types, and managing blood sugar levels.</p>
+                    <a href="./health-library.html" class="topic-link">Learn More →</a>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">🧼</div>
+                    <h3>Hygiene</h3>
+                    <p>Personal and community hygiene practices to prevent infection and illness.</p>
+                    <a href="./health-library.html" class="topic-link">Learn More →</a>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">💉</div>
+                    <h3>Vaccination</h3>
+                    <p>The importance of vaccines in preventing disease and protecting communities.</p>
+                    <a href="./health-library.html" class="topic-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Better health begins with better awareness.</h2>
+                <p>Start your journey toward better health information today. Explore our resources and learn how to take charge of your wellbeing.</p>
+                <div class="cta-buttons">
+                    <a href="./health-library.html" class="btn-primary">Explore Health Library</a>
+                    <a href="./contact.html" class="btn-secondary-outline">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP BUTTON ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="./assets/js/main.js"></script>
+</body>
+  </html>
