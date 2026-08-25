@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Library - Nexus Healthcare</title>
+    <meta name="description" content="Search and explore health topics, diseases, nutrition, and prevention tips.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        /* Additional styles for health library */
+        .library-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            border: 2px solid rgba(11, 59, 107, 0.1);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            background: var(--bg-white);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .search-box .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border: 2px solid rgba(11, 59, 107, 0.1);
+            border-radius: 50px;
+            background: var(--bg-white);
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-teal);
+            color: var(--primary-navy);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-navy);
+            color: #FFFFFF;
+            border-color: var(--primary-navy);
+        }
+
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .library-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .library-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+
+        .library-card .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--accent-glow);
+            color: var(--accent-teal);
+            margin-bottom: 12px;
+        }
+
+        .library-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+
+        .library-card .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .library-card .card-details {
+            display: none;
+        }
+
+        .library-card .card-details.open {
+            display: block;
+        }
+
+        .library-card .detail-item {
+            margin-bottom: 10px;
+        }
+
+        .library-card .detail-item strong {
+            color: var(--primary-navy);
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+        }
+
+        .library-card .detail-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .library-card .btn-read-more {
+            display: inline-block;
+            padding: 8px 20px;
+            border: none;
+            background: var(--accent-glow);
+            color: var(--accent-teal);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            margin-top: 8px;
+        }
+
+        .library-card .btn-read-more:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .no-results h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .library-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .library-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html" class="active">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./contact.html" class="btn-nav-cta">Get Healthcare Help</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Health Library</h1>
+                <p>Search and explore health topics, diseases, nutrition, and prevention tips.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LIBRARY SECTION ==================== -->
+    <section class="library-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Health Library</span>
+                <h2>Explore Health Topics</h2>
+                <p>Find reliable information on common health conditions, prevention tips, and wellness guidance.</p>
+            </div>
+
+            <!-- Search & Filter Controls -->
+            <div class="library-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchLibrary" placeholder="Search health topics..." aria-label="Search health library">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="disease">Diseases</button>
+                    <button class="filter-btn" data-filter="nutrition">Nutrition</button>
+                    <button class="filter-btn" data-filter="prevention">Prevention</button>
+                    <button class="filter-btn" data-filter="firstaid">First Aid</button>
+                    <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+                </div>
+            </div>
+
+            <!-- Library Cards Grid -->
+            <div class="library-grid" id="libraryGrid">
+                <!-- Card 1: Fever -->
+                <div class="library-card" data-category="disease" data-tags="fever temperature infection">
+                    <span class="card-tag">Disease</span>
+                    <h3>Fever</h3>
+                    <p class="card-desc">Understanding fever, its causes, and when to seek medical attention.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Fever is a temporary increase in body temperature, often due to an illness or infection. It's a natural defense mechanism.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Elevated body temperature (above 100.4°F / 38°C), chills, sweating, headache, muscle aches, weakness.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Practice good hygiene, stay hydrated, get adequate rest, and maintain a healthy immune system.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>If fever exceeds 103°F (39.4°C), lasts more than 3 days, or is accompanied by severe symptoms like difficulty breathing or confusion.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 2: Common Cold -->
+                <div class="library-card" data-category="disease" data-tags="cold virus infection respiratory">
+                    <span class="card-tag">Disease</span>
+                    <h3>Common Cold</h3>
+                    <p class="card-desc">Learn about the common cold, its symptoms, and how to manage it.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>The common cold is a viral infection of the upper respiratory tract. It is one of the most frequent illnesses worldwide.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Runny or stuffy nose, sore throat, cough, sneezing, mild headache, and sometimes low-grade fever.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Wash hands frequently, avoid close contact with infected individuals, and maintain good overall health.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>If symptoms persist beyond 10 days, worsen, or are accompanied by high fever or difficulty breathing.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 3: Diabetes -->
+                <div class="library-card" data-category="disease" data-tags="diabetes blood sugar insulin">
+                    <span class="card-tag">Disease</span>
+                    <h3>Diabetes Awareness</h3>
+                    <p class="card-desc">Understanding diabetes, its types, and management strategies.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Diabetes is a chronic condition that affects how the body processes blood sugar (glucose). There are two main types: Type 1 and Type 2.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Increased thirst, frequent urination, extreme hunger, unexplained weight loss, fatigue, and blurred vision.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Maintain a healthy weight, eat a balanced diet, exercise regularly, and monitor blood sugar levels as advised.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>If you experience symptoms of diabetes or have risk factors, consult a healthcare professional for testing.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 4: High Blood Pressure -->
+                <div class="library-card" data-category="disease" data-tags="blood pressure hypertension heart">
+                    <span class="card-tag">Disease</span>
+                    <h3>High Blood Pressure</h3>
+                    <p class="card-desc">Information about hypertension, its risks, and management.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>High blood pressure (hypertension) is a common condition where the force of blood against artery walls is consistently too high.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Often no symptoms. Severe cases may include headaches, shortness of breath, or nosebleeds.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Maintain a healthy weight, reduce salt intake, exercise regularly, limit alcohol, and manage stress.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>Regular checkups are essential. Seek immediate help if you experience chest pain or severe headache.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 5: Asthma -->
+                <div class="library-card" data-category="disease" data-tags="asthma breathing respiratory">
+                    <span class="card-tag">Disease</span>
+                    <h3>Asthma</h3>
+                    <p class="card-desc">Understanding asthma, triggers, and management strategies.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Asthma is a chronic lung condition that inflames and narrows the airways, making breathing difficult.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Wheezing, shortness of breath, chest tightness, and coughing, especially at night or early morning.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Avoid triggers like allergens, smoke, and strong odors. Take prescribed medications as directed.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>Seek immediate help if symptoms worsen or if rescue medication doesn't provide relief.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 6: Heart Health -->
+                <div class="library-card" data-category="prevention" data-tags="heart cardiovascular prevention">
+                    <span class="card-tag">Prevention</span>
+                    <h3>Heart Health</h3>
+                    <p class="card-desc">Tips for maintaining a healthy heart and preventing cardiovascular disease.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Heart health refers to the overall condition of your heart and cardiovascular system. It's essential for overall wellbeing.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Regular checkups monitor blood pressure, cholesterol, and heart function. Chest pain or shortness of breath may indicate problems.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Eat a heart-healthy diet, exercise regularly, avoid smoking, manage stress, and maintain a healthy weight.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>Seek immediate medical attention for chest pain, shortness of breath, or sudden dizziness.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 7: Nutrition -->
+                <div class="library-card" data-category="nutrition" data-tags="nutrition diet food healthy eating">
+                    <span class="card-tag">Nutrition</span>
+                    <h3>Nutrition</h3>
+                    <p class="card-desc">Understanding balanced nutrition and healthy eating habits for all ages.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Nutrition is the process of consuming and utilizing food for growth, health, and energy. A balanced diet is essential.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Good nutrition leads to energy, healthy weight, strong immunity, and overall wellbeing. Poor nutrition may cause fatigue or illness.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Eat a variety of fruits, vegetables, whole grains, and lean proteins. Stay hydrated and limit processed foods.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>Consult a dietitian or healthcare provider for personalized nutrition advice.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 8: Dehydration -->
+                <div class="library-card" data-category="firstaid" data-tags="dehydration water hydration">
+                    <span class="card-tag">First Aid</span>
+                    <h3>Dehydration</h3>
+                    <p class="card-desc">Recognizing and preventing dehydration for better health.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Dehydration occurs when the body loses more fluids than it takes in, affecting normal body functions.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Thirst, dry mouth, dark urine, fatigue, dizziness, and confusion in severe cases.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Drink adequate water daily, increase intake during hot weather or physical activity, and eat water-rich foods.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>Seek immediate help if there is confusion, rapid heartbeat, or inability to keep fluids down.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 9: Hygiene -->
+                <div class="library-card" data-category="prevention" data-tags="hygiene cleaning prevention">
+                    <span class="card-tag">Prevention</span>
+                    <h3>Hygiene</h3>
+                    <p class="card-desc">Personal and community hygiene practices to prevent infection.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Hygiene refers to practices that maintain health and prevent the spread of disease through cleanliness.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Good hygiene practices include regular handwashing, oral care, bathing, and clean living spaces.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Wash hands frequently with soap, cover coughs, clean surfaces, and maintain personal cleanliness.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>If you develop persistent infections or notice signs of poor hygiene-related illness.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+
+                <!-- Card 10: Vaccination -->
+                <div class="library-card" data-category="prevention" data-tags="vaccination vaccine immunity">
+                    <span class="card-tag">Prevention</span>
+                    <h3>Vaccination</h3>
+                    <p class="card-desc">Understanding vaccines, their importance, and vaccination schedules.</p>
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <strong>What it is:</strong>
+                            <p>Vaccination is a safe and effective way to protect against infectious diseases by building immunity.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Common signs:</strong>
+                            <p>Vaccines are given at specific ages. Mild side effects may include soreness or low-grade fever.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Prevention:</strong>
+                            <p>Follow recommended vaccination schedules for children and adults. Stay updated on boosters.</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>When to seek help:</strong>
+                            <p>Consult a healthcare provider about vaccination needs and any concerns.</p>
+                        </div>
+                    </div>
+                    <button class="btn-read-more" onclick="toggleDetails(this)">Read More</button>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults">
+                <h3>🔍 No Results Found</h3>
+                <p>Try adjusting your search or filter to find what you're looking for.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DISCLAIMER SECTION ==================== -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-box">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <h3>Medical Disclaimer</h3>
+                    <p>The information provided in this Health Library is for educational purposes only. It is not intended to diagnose, treat, or cure any disease. Always consult a qualified healthcare professional for medical advice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Still Have Questions?</h2>
+                <p>Reach out to us for more information about our health resources and services.</p>
+                <div class="cta-buttons">
+                    <a href="./contact.html" class="btn-primary">Contact Us</a>
+                    <a href="./services.html" class="btn-secondary-outline">Explore Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP BUTTON ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="./assets/js/main.js"></script>
+    <script>
+        // Toggle details on Read More button
+        function toggleDetails(btn) {
+            const card = btn.closest('.library-card');
+            const details = card.querySelector('.card-details');
+            const isOpen = details.classList.contains('open');
+            
+            if (isOpen) {
+                details.classList.remove('open');
+                btn.textContent = 'Read More';
+            } else {
+                details.classList.add('open');
+                btn.textContent = 'Read Less';
+            }
+        }
+
+        // Search and filter functionality (enhanced)
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchLibrary');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.library-card');
+            const noResults = document.getElementById('noResults');
+
+            function filterCards() {
+                const query = searchInput.value.toLowerCase().trim();
+                const activeFilter = document.querySelector('.filter-btn.active');
+                const filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+                
+                let visibleCount = 0;
+
+                cards.forEach(function(card) {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+                    const tags = card.getAttribute('data-tags').toLowerCase();
+                    const category = card.getAttribute('data-category');
+
+                    const matchesSearch = title.includes(query) || desc.includes(query) || tags.includes(query);
+                    const matchesFilter = filter === 'all' || category === filter;
+
+                    if (matchesSearch && matchesFilter) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            }
+
+            // Search input event
+            searchInput.addEventListener('input', filterCards);
+
+            // Filter button events
+            filterBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    filterCards();
+                });
+            });
+        });
+    </script>
+</body>
+                          </html>
