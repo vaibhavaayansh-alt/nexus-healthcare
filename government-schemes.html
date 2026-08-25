@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Healthcare Schemes - Nexus Healthcare</title>
+    <meta name="description" content="Information about Indian public healthcare initiatives and schemes.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .schemes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .scheme-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scheme-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+
+        .scheme-card .scheme-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--accent-glow);
+            color: var(--accent-teal);
+            margin-bottom: 12px;
+        }
+
+        .scheme-card .scheme-icon {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .scheme-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+
+        .scheme-card .scheme-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .scheme-card .scheme-details {
+            border-top: 1px solid rgba(11, 59, 107, 0.06);
+            padding-top: 12px;
+            margin-top: 8px;
+        }
+
+        .scheme-card .scheme-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .scheme-card .scheme-details strong {
+            color: var(--primary-navy);
+        }
+
+        .scheme-card .btn-scheme-link {
+            display: inline-block;
+            padding: 8px 24px;
+            border: 2px solid var(--accent-teal);
+            background: transparent;
+            color: var(--accent-teal);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            margin-top: 12px;
+        }
+
+        .scheme-card .btn-scheme-link:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+        }
+
+        .scheme-disclaimer {
+            background: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            padding: 20px 24px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 40px;
+        }
+
+        .scheme-disclaimer h3 {
+            color: #E65100;
+            margin-bottom: 4px;
+        }
+
+        .scheme-disclaimer p {
+            color: #BF360C;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .schemes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html" class="active">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./contact.html" class="btn-nav-cta">Get Healthcare Help</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>🇮🇳 Government Healthcare Schemes</h1>
+                <p>Understanding Indian public healthcare initiatives in simple language.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SCHEMES SECTION ==================== -->
+    <section class="schemes-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Public Healthcare</span>
+                <h2>Government Healthcare Initiatives</h2>
+                <p>Information about major Indian public healthcare schemes and programs.</p>
+            </div>
+
+            <div class="scheme-disclaimer">
+                <h3>⚠️ Important Note</h3>
+                <p>This information is for educational purposes only. Eligibility criteria, benefits, and scheme rules may change. Always verify current information through official Government of India sources.</p>
+            </div>
+
+            <div class="schemes-grid">
+                <!-- Scheme 1: Ayushman Bharat -->
+                <div class="scheme-card">
+                    <span class="scheme-icon">🏥</span>
+                    <span class="scheme-badge">National Scheme</span>
+                    <h3>Ayushman Bharat</h3>
+                    <p class="scheme-desc">India's flagship public health insurance scheme providing coverage for eligible families.</p>
+                    <div class="scheme-details">
+                        <p><strong>Purpose:</strong> To provide health coverage for eligible families</p>
+                        <p><strong>Who it's for:</strong> Eligible families as per government criteria</p>
+                        <p><strong>General Benefit:</strong> Coverage for eligible hospitalization expenses</p>
+                    </div>
+                    <a href="./ayushman-bharat.html" class="btn-scheme-link">Learn More →</a>
+                </div>
+
+                <!-- Scheme 2: PM-JAY -->
+                <div class="scheme-card">
+                    <span class="scheme-icon">🛡️</span>
+                    <span class="scheme-badge">National Scheme</span>
+                    <h3>PM-JAY</h3>
+                    <p class="scheme-desc">Pradhan Mantri Jan Arogya Yojana - A component of Ayushman Bharat.</p>
+                    <div class="scheme-details">
+                        <p><strong>Purpose:</strong> To provide health coverage for eligible families</p>
+                        <p><strong>Who it's for:</strong> Eligible families as per government criteria</p>
+                        <p><strong>General Benefit:</strong> Coverage for eligible hospitalization expenses</p>
+                    </div>
+                    <a href="./ayushman-bharat.html" class="btn-scheme-link">Learn More →</a>
+                </div>
+
+                <!-- Scheme 3: Ayushman Arogya Mandirs -->
+                <div class="scheme-card">
+                    <span class="scheme-icon">🏥</span>
+                    <span class="scheme-badge">Healthcare Infrastructure</span>
+                    <h3>Ayushman Arogya Mandirs</h3>
+                    <p class="scheme-desc">Healthcare centers providing comprehensive primary healthcare services.</p>
+                    <div class="scheme-details">
+                        <p><strong>Purpose:</strong> To provide accessible primary healthcare</p>
+                        <p><strong>Who it's for:</strong> All communities</p>
+                        <p><strong>General Benefit:</strong> Comprehensive primary healthcare services</p>
+                    </div>
+                    <button class="btn-scheme-link" onclick="showSchemeInfo('Ayushman Arogya Mandirs', 'Comprehensive primary healthcare centers providing accessible healthcare services to communities.')">Learn More →</button>
+                </div>
+
+                <!-- Scheme 4: National Health Mission -->
+                <div class="scheme-card">
+                    <span class="scheme-icon">🌍</span>
+                    <span class="scheme-badge">National Mission</span>
+                    <h3>National Health Mission</h3>
+                    <p class="scheme-desc">A comprehensive healthcare mission improving health outcomes across India.</p>
+                    <div class="scheme-details">
+                        <p><strong>Purpose:</strong> To strengthen healthcare systems</p>
+                        <p><strong>Who it's for:</strong> All communities</p>
+                        <p><strong>General Benefit:</strong> Improved healthcare access and outcomes</p>
+                    </div>
+                    <button class="btn-scheme-link" onclick="showSchemeInfo('National Health Mission', 'A comprehensive mission to strengthen healthcare systems and improve health outcomes across India.')">Learn More →</button>
+                </div>
+
+                <!-- Scheme 5: JSY - Janani Suraksha Yojana -->
+                <div class="scheme-card">
+                    <span class="scheme-icon">👩</span>
+                    <span class="scheme-badge">Maternal Health</span>
+                    <h3>Janani Suraksha Yojana</h3>
+                    <p class="scheme-desc">Maternal health program promoting institutional deliveries among pregnant women.</p>
+                    <div class="scheme-details">
+                        <p><strong>Purpose:</strong> To promote institutional deliveries</p>
+                        <p><strong>Who it's for:</strong> Pregnant women</p>
+                        <p><strong>General Benefit:</strong> Financial assistance for safe delivery</p>
+                    </div>
+                    <button class="btn-scheme-link" onclick="showSchemeInfo('Janani Suraksha Yojana', 'Maternal health program promoting institutional deliveries and providing financial assistance to pregnant women.')">Learn More →</button>
+                </div>
+
+                <!-- Scheme 6: PMJAY SEHAT -->
+                <div class="scheme-card">
+                    <span class="scheme-icon">❤️</span>
+                    <span class="scheme-badge">Regional Scheme</span>
+                    <h3>PMJAY SEHAT</h3>
+                    <p class="scheme-desc">Health coverage scheme for eligible families in specific regions.</p>
+                    <div class="scheme-details">
+                        <p><strong>Purpose:</strong> To provide health coverage</p>
+                        <p><strong>Who it's for:</strong> Eligible families in specific regions</p>
+                        <p><strong>General Benefit:</strong> Coverage for eligible treatments</p>
+                    </div>
+                    <button class="btn-scheme-link" onclick="showSchemeInfo('PMJAY SEHAT', 'Health coverage scheme providing coverage for eligible families in specific regions of India.')">Learn More →</button>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 20px; background: #E8F5E9; border-radius: var(--radius-sm);">
+                <p style="color: #2E7D32; margin: 0; font-size: 0.95rem;">
+                    ✅ <strong>Always verify:</strong> Check official Government of India sources for current and accurate information about these schemes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DISCLAIMER SECTION ==================== -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-box">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <h3>Important Notice</h3>
+                    <p>Do not invent eligibility criteria. Tell users to verify current information through official Government of India sources. Eligibility, benefits, hospital availability and scheme rules may change over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Learn More About Healthcare Schemes</h2>
+                <p>Visit the official government websites for detailed and current information.</p>
+                <div class="cta-buttons">
+                    <a href="https://www.pmjay.gov.in/" target="_blank" class="btn-primary">Visit PM-JAY Website</a>
+                    <a href="./ayushman-bharat.html" class="btn-secondary-outline">Learn About Ayushman Bharat</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP BUTTON ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="./assets/js/main.js"></script>
+    <script>
+        function showSchemeInfo(name, description) {
+            alert(
+                '🏥 ' + name + '\n\n' +
+                description + '\n\n' +
+                '⚠️ This is for educational purposes only.\n' +
+                'Always verify current information through official Government of India sources.'
+            );
+        }
+    </script>
+</body>
+  </html>
