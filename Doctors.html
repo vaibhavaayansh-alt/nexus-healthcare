@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctors - Nexus Healthcare</title>
+    <meta name="description" content="Meet our team of healthcare professionals at Nexus Healthcare.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .doctor-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+
+        .doctor-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-glow), var(--bg-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 2.8rem;
+            border: 3px solid var(--accent-teal);
+        }
+
+        .doctor-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 4px;
+        }
+
+        .doctor-specialty {
+            color: var(--accent-teal);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .doctor-details {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .doctor-details strong {
+            color: var(--primary-navy);
+        }
+
+        .doctor-card .btn-view-profile {
+            display: inline-block;
+            padding: 8px 28px;
+            border: 2px solid var(--accent-teal);
+            background: transparent;
+            color: var(--accent-teal);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            margin-top: 12px;
+        }
+
+        .doctor-card .btn-view-profile:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+        }
+
+        .doctor-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 12px;
+            border-radius: 50px;
+            background: #E8F5E9;
+            color: #2E7D32;
+            margin-bottom: 8px;
+        }
+
+        .appointment-section {
+            background: var(--bg-light);
+            padding: 60px 0;
+        }
+
+        .appointment-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            padding: 48px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .appointment-wrapper h2 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .appointment-wrapper .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-navy);
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(11, 59, 107, 0.1);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            background: var(--bg-white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #D32F2F;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-errors {
+            background: #FFEBEE;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .form-errors p {
+            color: #D32F2F;
+            margin: 4px 0;
+            font-size: 0.9rem;
+        }
+
+        .form-success {
+            display: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-navy), var(--primary-blue));
+            color: #FFFFFF;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .demo-notice {
+            text-align: center;
+            margin-top: 16px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            padding: 12px;
+            background: #FFF3E0;
+            border-radius: var(--radius-sm);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .appointment-wrapper {
+                padding: 24px;
+            }
+
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html" class="active">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./contact.html" class="btn-nav-cta">Get Healthcare Help</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Our Doctors</h1>
+                <p>Meet our team of dedicated healthcare professionals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DOCTORS SECTION ==================== -->
+    <section class="doctors-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Team</span>
+                <h2>Healthcare Professionals</h2>
+                <p>Demo profiles of healthcare specialists. All information is for educational purposes only.</p>
+            </div>
+
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <span class="doctor-badge">Available</span>
+                    <h3>Dr. Ananya Sharma</h3>
+                    <p class="doctor-specialty">General Physician</p>
+                    <p class="doctor-details"><strong>Experience:</strong> 12+ Years</p>
+                    <p class="doctor-details"><strong>Availability:</strong> Mon-Sat, 9 AM - 5 PM</p>
+                    <button class="btn-view-profile" onclick="showDoctorProfile('Dr. Ananya Sharma', 'General Physician', '12+ Years')">View Profile</button>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <span class="doctor-badge">Available</span>
+                    <h3>Dr. Rohan Verma</h3>
+                    <p class="doctor-specialty">Pediatrician</p>
+                    <p class="doctor-details"><strong>Experience:</strong> 10+ Years</p>
+                    <p class="doctor-details"><strong>Availability:</strong> Mon-Fri, 10 AM - 6 PM</p>
+                    <button class="btn-view-profile" onclick="showDoctorProfile('Dr. Rohan Verma', 'Pediatrician', '10+ Years')">View Profile</button>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <span class="doctor-badge">Available</span>
+                    <h3>Dr. Meera Singh</h3>
+                    <p class="doctor-specialty">Cardiologist</p>
+                    <p class="doctor-details"><strong>Experience:</strong> 15+ Years</p>
+                    <p class="doctor-details"><strong>Availability:</strong> Tue-Sat, 8 AM - 4 PM</p>
+                    <button class="btn-view-profile" onclick="showDoctorProfile('Dr. Meera Singh', 'Cardiologist', '15+ Years')">View Profile</button>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <span class="doctor-badge">Available</span>
+                    <h3>Dr. Arjun Kumar</h3>
+                    <p class="doctor-specialty">Orthopedic Specialist</p>
+                    <p class="doctor-details"><strong>Experience:</strong> 14+ Years</p>
+                    <p class="doctor-details"><strong>Availability:</strong> Mon-Sat, 9 AM - 5 PM</p>
+                    <button class="btn-view-profile" onclick="showDoctorProfile('Dr. Arjun Kumar', 'Orthopedic Specialist', '14+ Years')">View Profile</button>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <span class="doctor-badge">Available</span>
+                    <h3>Dr. Priya Patel</h3>
+                    <p class="doctor-specialty">Gynecologist</p>
+                    <p class="doctor-details"><strong>Experience:</strong> 11+ Years</p>
+                    <p class="doctor-details"><strong>Availability:</strong> Mon-Fri, 9 AM - 3 PM</p>
+                    <button class="btn-view-profile" onclick="showDoctorProfile('Dr. Priya Patel', 'Gynecologist', '11+ Years')">View Profile</button>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <span class="doctor-badge">Available</span>
+                    <h3>Dr. Vikram Reddy</h3>
+                    <p class="doctor-specialty">Neurologist</p>
+                    <p class="doctor-details"><strong>Experience:</strong> 16+ Years</p>
+                    <p class="doctor-details"><strong>Availability:</strong> Mon-Thu, 10 AM - 6 PM</p>
+                    <button class="btn-view-profile" onclick="showDoctorProfile('Dr. Vikram Reddy', 'Neurologist', '16+ Years')">View Profile</button>
+                </div>
+            </div>
+
+            <div class="demo-notice" style="text-align:center; max-width:600px; margin:0 auto;">
+                ⚠️ <strong>Demo Profiles:</strong> These are sample doctor profiles for educational purposes. No actual appointments are being booked.
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== APPOINTMENT SECTION ==================== -->
+    <section class="appointment-section" id="appointment">
+        <div class="container">
+            <div class="appointment-wrapper">
+                <h2>📋 Book a Demo Appointment</h2>
+                <p class="subtitle">Fill in the details below to request a demo appointment.</p>
+
+                <div class="form-errors" id="formErrors"></div>
+                <div class="form-success" id="formSuccess"></div>
+
+                <form id="appointmentForm">
+                    <div class="form-group">
+                        <label for="appName">Full Name *</label>
+                        <input type="text" id="appName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appAge">Age *</label>
+                        <input type="number" id="appAge" placeholder="Enter your age" min="1" max="120" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="appDate">Preferred Date *</label>
+                            <input type="date" id="appDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="appTime">Preferred Time *</label>
+                            <input type="time" id="appTime" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appDoctor">Select Doctor</label>
+                        <select id="appDoctor">
+                            <option value="">Select a doctor...</option>
+                            <option value="Dr. Ananya Sharma">Dr. Ananya Sharma - General Physician</option>
+                            <option value="Dr. Rohan Verma">Dr. Rohan Verma - Pediatrician</option>
+                            <option value="Dr. Meera Singh">Dr. Meera Singh - Cardiologist</option>
+                            <option value="Dr. Arjun Kumar">Dr. Arjun Kumar - Orthopedic Specialist</option>
+                            <option value="Dr. Priya Patel">Dr. Priya Patel - Gynecologist</option>
+                            <option value="Dr. Vikram Reddy">Dr. Vikram Reddy - Neurologist</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appReason">Reason for Visit *</label>
+                        <textarea id="appReason" placeholder="Briefly describe your health concern" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Request Demo Appointment</button>
+                </form>
+
+                <div class="demo-notice">
+                    ⚠️ This is a demonstration. No actual appointment has been booked. Please consult a real healthcare provider for medical needs.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Need More Information?</h2>
+                <p>Contact us to learn more about our healthcare resources and services.</p>
+                <div class="cta-buttons">
+                    <a href="./contact.html" class="btn-primary">Contact Us</a>
+                    <a href="./health-library.html" class="btn-secondary-outline">Visit Health Library</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP BUTTON ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="./assets/js/main.js"></script>
+    <script>
+        function showDoctorProfile(name, specialty, experience) {
+            alert(
+                '👨‍⚕️ Doctor Profile (Demo)\n\n' +
+                'Name: ' + name + '\n' +
+                'Specialty: ' + specialty + '\n' +
+                'Experience: ' + experience + '\n\n' +
+                '⚠️ This is a demo profile for educational purposes.\n' +
+                'No actual appointments are being booked.'
+            );
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('appDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+            }
+        });
+    </script>
+</body>
+  </html>
