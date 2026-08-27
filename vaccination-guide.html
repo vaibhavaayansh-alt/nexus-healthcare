@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccination Guide - Nexus Healthcare</title>
+    <meta name="description" content="Complete guide to vaccinations, vaccine schedules, and their importance for all ages.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .vaccine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .vaccine-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .vaccine-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+        .vaccine-card .vaccine-icon {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .vaccine-card .vaccine-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--accent-glow);
+            color: var(--accent-teal);
+            margin-bottom: 12px;
+        }
+        .vaccine-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+        .vaccine-card .vaccine-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+        .vaccine-card .vaccine-details {
+            display: none;
+            padding-top: 16px;
+            border-top: 1px solid rgba(11, 59, 107, 0.06);
+        }
+        .vaccine-card .vaccine-details.open {
+            display: block;
+        }
+        .vaccine-card .vaccine-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .vaccine-card .vaccine-details strong {
+            color: var(--primary-navy);
+        }
+        .vaccine-card .btn-toggle {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 2px solid var(--accent-teal);
+            background: transparent;
+            color: var(--accent-teal);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        .vaccine-card .btn-toggle:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+        }
+        .schedule-table {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+        .schedule-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .schedule-table th {
+            background: var(--primary-navy);
+            color: #FFFFFF;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .schedule-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(11, 59, 107, 0.06);
+            color: var(--text-muted);
+        }
+        .schedule-table tr:hover td {
+            background: var(--bg-light);
+        }
+        .schedule-table .highlight-row td {
+            background: var(--accent-glow);
+        }
+        @media (max-width: 768px) {
+            .vaccine-grid {
+                grid-template-columns: 1fr;
+            }
+            .schedule-table table {
+                font-size: 0.8rem;
+            }
+            .schedule-table th, .schedule-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./about-me.html" class="btn-nav-cta">About Me</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>💉 Vaccination Guide</h1>
+                <p>Understanding vaccines, their importance, and vaccination schedules for all ages.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VACCINE SCHEDULE ==================== -->
+    <section class="schedule-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Vaccine Schedule</span>
+                <h2>Recommended Vaccination Schedule</h2>
+                <p>General vaccination guidelines for different age groups. Always consult a healthcare provider for personalized advice.</p>
+            </div>
+
+            <div class="schedule-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Age Group</th>
+                            <th>Vaccines</th>
+                            <th>When to Get</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Infants (0-12 months)</strong></td>
+                            <td>BCG, Hepatitis B, DPT, Polio, Hib, Rotavirus, PCV</td>
+                            <td>Birth to 12 months</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Children (1-5 years)</strong></td>
+                            <td>MMR, Varicella, DPT Booster, Polio Booster, Hepatitis A</td>
+                            <td>1 to 5 years</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Children (6-12 years)</strong></td>
+                            <td>HPV (Girls), Tdap Booster, Meningococcal</td>
+                            <td>6 to 12 years</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Adolescents (13-18 years)</strong></td>
+                            <td>HPV, Meningococcal, Tdap, Flu Vaccine (Annual)</td>
+                            <td>13 to 18 years</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adults (19-49 years)</strong></td>
+                            <td>Flu (Annual), Tdap (Every 10 years), HPV (Up to 45), Hepatitis A/B</td>
+                            <td>19 to 49 years</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Seniors (50+ years)</strong></td>
+                            <td>Flu (Annual), Pneumococcal, Shingles, Tdap (Every 10 years)</td>
+                            <td>50+ years</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VACCINE CARDS ==================== -->
+    <section class="vaccine-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Common Vaccines</span>
+                <h2>Types of Vaccines</h2>
+                <p>Learn about the most common vaccines and their importance.</p>
+            </div>
+
+            <div class="vaccine-grid">
+                <!-- Vaccine 1 -->
+                <div class="vaccine-card">
+                    <span class="vaccine-icon">💉</span>
+                    <span class="vaccine-tag">Preventive</span>
+                    <h3>BCG Vaccine</h3>
+                    <p class="vaccine-desc">Protects against tuberculosis (TB), especially in children.</p>
+                    <button class="btn-toggle" onclick="toggleVaccine(this)">Learn More</button>
+                    <div class="vaccine-details">
+                        <p><strong>What it prevents:</strong> Tuberculosis (TB), a serious lung infection.</p>
+                        <p><strong>When to get:</strong> At birth or as early as possible in infancy.</p>
+                        <p><strong>Why it's important:</strong> TB is a major health concern in many parts of the world. BCG provides protection against severe forms of TB in children.</p>
+                    </div>
+                </div>
+
+                <!-- Vaccine 2 -->
+                <div class="vaccine-card">
+                    <span class="vaccine-icon">💉</span>
+                    <span class="vaccine-tag">Preventive</span>
+                    <h3>Hepatitis B Vaccine</h3>
+                    <p class="vaccine-desc">Protects against hepatitis B virus, which affects the liver.</p>
+                    <button class="btn-toggle" onclick="toggleVaccine(this)">Learn More</button>
+                    <div class="vaccine-details">
+                        <p><strong>What it prevents:</strong> Hepatitis B, a viral infection that attacks the liver.</p>
+                        <p><strong>When to get:</strong> Birth, 1-2 months, and 6-18 months.</p>
+                        <p><strong>Why it's important:</strong> Hepatitis B can cause chronic liver disease and liver cancer. Vaccination provides long-term protection.</p>
+                    </div>
+                </div>
+
+                <!-- Vaccine 3 -->
+                <div class="vaccine-card">
+                    <span class="vaccine-icon">💉</span>
+                    <span class="vaccine-tag">Preventive</span>
+                    <h3>DPT Vaccine</h3>
+                    <p class="vaccine-desc">Protects against diphtheria, pertussis (whooping cough), and tetanus.</p>
+                    <button class="btn-toggle" onclick="toggleVaccine(this)">Learn More</button>
+                    <div class="vaccine-details">
+                        <p><strong>What it prevents:</strong> Diphtheria, Pertussis (Whooping Cough), Tetanus.</p>
+                        <p><strong>When to get:</strong> 2, 4, 6, 15-18 months, and 4-6 years (booster).</p>
+                        <p><strong>Why it's important:</strong> These are serious bacterial infections that can be fatal. DPT vaccine provides comprehensive protection.</p>
+                    </div>
+                </div>
+
+                <!-- Vaccine 4 -->
+                <div class="vaccine-card">
+                    <span class="vaccine-icon">💉</span>
+                    <span class="vaccine-tag">Preventive</span>
+                    <h3>Polio Vaccine</h3>
+                    <p class="vaccine-desc">Protects against poliovirus, which can cause paralysis.</p>
+                    <button class="btn-toggle" onclick="toggleVaccine(this)">Learn More</button>
+                    <div class="vaccine-details">
+                        <p><strong>What it prevents:</strong> Polio, a viral disease that can cause paralysis.</p>
+                        <p><strong>When to get:</strong> Birth, 6, 10, and 14 weeks; booster at 16-24 months.</p>
+                        <p><strong>Why it's important:</strong> Polio is a crippling disease. Vaccination has helped eliminate polio from most parts of the world.</p>
+                    </div>
+                </div>
+
+                <!-- Vaccine 5 -->
+                <div class="vaccine-card">
+                    <span class="vaccine-icon">💉</span>
+                    <span class="vaccine-tag">Preventive</span>
+                    <h3>MMR Vaccine</h3>
+                    <p class="vaccine-desc">Protects against measles, mumps, and rubella.</p>
+                    <button class="btn-toggle" onclick="toggleVaccine(this)">Learn More</button>
+                    <div class="vaccine-details">
+                        <p><strong>What it prevents:</strong> Measles, Mumps, Rubella (German Measles).</p>
+                        <p><strong>When to get:</strong> 12-15 months and 4-6 years (booster).</p>
+                        <p><strong>Why it's important:</strong> These diseases can cause serious complications, especially in children. MMR provides safe and effective protection.</p>
+                    </div>
+                </div>
+
+                <!-- Vaccine 6 -->
+                <div class="vaccine-card">
+                    <span class="vaccine-icon">💉</span>
+                    <span class="vaccine-tag">Preventive</span>
+                    <h3>HPV Vaccine</h3>
+                    <p class="vaccine-desc">Protects against human papillomavirus, which can cause cervical cancer.</p>
+                    <button class="btn-toggle" onclick="toggleVaccine(this)">Learn More</button>
+                    <div class="vaccine-details">
+                        <p><strong>What it prevents:</strong> HPV infection and related cancers (cervical, throat, etc.).</p>
+                        <p><strong>When to get:</strong> 9-14 years (2 doses); 15-26 years (3 doses).</p>
+                        <p><strong>Why it's important:</strong> HPV is a major cause of cervical cancer. Vaccination provides up to 90% protection against HPV-related cancers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMPORTANCE SECTION ==================== -->
+    <section class="importance-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Why Vaccines</span>
+                <h2>Why Vaccination Matters</h2>
+                <p>Understanding the importance of vaccines for individual and community health.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                <div style="background: var(--bg-white); padding: 24px; border-radius: var(--radius-sm); border: 1px solid rgba(11, 59, 107, 0.06); text-align: center;">
+                    <span style="font-size: 2.4rem; display: block; margin-bottom: 8px;">🛡️</span>
+                    <h4 style="color: var(--primary-navy); margin-bottom: 4px;">Protection</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Vaccines train your immune system to fight diseases before they can harm you.</p>
+                </div>
+                <div style="background: var(--bg-white); padding: 24px; border-radius: var(--radius-sm); border: 1px solid rgba(11, 59, 107, 0.06); text-align: center;">
+                    <span style="font-size: 2.4rem; display: block; margin-bottom: 8px;">👨‍👩‍👧‍👦</span>
+                    <h4 style="color: var(--primary-navy); margin-bottom: 4px;">Community Immunity</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">When many people are vaccinated, it protects those who cannot be vaccinated.</p>
+                </div>
+                <div style="background: var(--bg-white); padding: 24px; border-radius: var(--radius-sm); border: 1px solid rgba(11, 59, 107, 0.06); text-align: center;">
+                    <span style="font-size: 2.4rem; display: block; margin-bottom: 8px;">💪</span>
+                    <h4 style="color: var(--primary-navy); margin-bottom: 4px;">Disease Eradication</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Vaccines have helped eradicate diseases like smallpox and reduce many others.</p>
+                </div>
+                <div style="background: var(--bg-white); padding: 24px; border-radius: var(--radius-sm); border: 1px solid rgba(11, 59, 107, 0.06); text-align: center;">
+                    <span style="font-size: 2.4rem; display: block; margin-bottom: 8px;">💰</span>
+                    <h4 style="color: var(--primary-navy); margin-bottom: 4px;">Cost-Effective</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Preventing diseases through vaccination is much cheaper than treating them.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DISCLAIMER ==================== -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-box">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <h3>Medical Disclaimer</h3>
+                    <p>This vaccination guide is for educational purposes only. Always consult a qualified healthcare provider for personalized vaccination advice and schedules. Recommendations may vary based on location, health status, and individual needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Want to Learn More?</h2>
+                <p>Explore our Health Library for more health information and resources.</p>
+                <div class="cta-buttons">
+                    <a href="./health-library.html" class="btn-primary">Visit Health Library</a>
+                    <a href="./contact.html" class="btn-secondary-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+        function toggleVaccine(btn) {
+            const card = btn.closest('.vaccine-card');
+            const details = card.querySelector('.vaccine-details');
+            if (details.classList.contains('open')) {
+                details.classList.remove('open');
+                btn.textContent = 'Learn More';
+            } else {
+                details.classList.add('open');
+                btn.textContent = 'Read Less';
+            }
+        }
+    </script>
+</body>
+  </html>
