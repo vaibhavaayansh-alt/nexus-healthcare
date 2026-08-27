@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Blog - Nexus Healthcare</title>
+    <meta name="description" content="Health articles, tips, and wellness blogs by Nexus Healthcare.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .blog-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+        .blog-card .blog-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--accent-glow);
+            color: var(--accent-teal);
+            margin-bottom: 12px;
+        }
+        .blog-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+        .blog-card .blog-meta {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+        .blog-card .blog-excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+        .blog-card .btn-read-more {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 2px solid var(--accent-teal);
+            background: transparent;
+            color: var(--accent-teal);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        .blog-card .btn-read-more:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+        }
+        .blog-card .blog-content {
+            display: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(11, 59, 107, 0.06);
+        }
+        .blog-card .blog-content.open {
+            display: block;
+        }
+        .blog-card .blog-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./about-me.html" class="btn-nav-cta">About Me</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>📝 Health Blog</h1>
+                <p>Articles, tips, and insights for a healthier life.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BLOG SECTION ==================== -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Latest Articles</span>
+                <h2>Health & Wellness Blog</h2>
+                <p>Read our latest articles on health, wellness, and preventive care.</p>
+            </div>
+
+            <div class="blog-grid">
+                <!-- Blog 1 -->
+                <div class="blog-card">
+                    <span class="blog-tag">Wellness</span>
+                    <h3>10 Daily Habits for a Healthier Life</h3>
+                    <p class="blog-meta">📅 August 2026 | ⏱️ 5 min read</p>
+                    <p class="blog-excerpt">Small changes in your daily routine can lead to big improvements in your overall health and wellbeing.</p>
+                    <button class="btn-read-more" onclick="toggleBlog(this)">Read More</button>
+                    <div class="blog-content">
+                        <p><strong>1. Start Your Day with Water</strong><br>Drink a glass of water first thing in the morning to hydrate your body.</p>
+                        <p><strong>2. Eat a Balanced Breakfast</strong><br>Include protein, fiber, and healthy fats in your morning meal.</p>
+                        <p><strong>3. Move Your Body</strong><br>Even 15 minutes of exercise can boost your energy and mood.</p>
+                        <p><strong>4. Take Breaks</strong><br>Step away from screens every hour to rest your eyes and mind.</p>
+                        <p><strong>5. Practice Mindfulness</strong><br>Spend 5 minutes a day focusing on your breath and being present.</p>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="blog-card">
+                    <span class="blog-tag">Nutrition</span>
+                    <h3>Healthy Eating on a Budget</h3>
+                    <p class="blog-meta">📅 August 2026 | ⏱️ 6 min read</p>
+                    <p class="blog-excerpt">Eating healthy doesn't have to be expensive. Here are tips to eat well while saving money.</p>
+                    <button class="btn-read-more" onclick="toggleBlog(this)">Read More</button>
+                    <div class="blog-content">
+                        <p><strong>1. Plan Your Meals</strong><br>Plan weekly meals to avoid impulse buying and reduce food waste.</p>
+                        <p><strong>2. Buy in Bulk</strong><br>Purchase staples like rice, lentils, and oats in bulk for savings.</p>
+                        <p><strong>3. Seasonal Produce</strong><br>Buy fruits and vegetables that are in season — they're cheaper and fresher.</p>
+                        <p><strong>4. Cook at Home</strong><br>Cooking at home is healthier and more affordable than eating out.</p>
+                        <p><strong>5. Use Leftovers</strong><br>Transform leftovers into new meals to save time and money.</p>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="blog-card">
+                    <span class="blog-tag">Mental Health</span>
+                    <h3>Managing Stress in Everyday Life</h3>
+                    <p class="blog-meta">📅 July 2026 | ⏱️ 4 min read</p>
+                    <p class="blog-excerpt">Stress is a part of life, but managing it effectively can improve your mental and physical health.</p>
+                    <button class="btn-read-more" onclick="toggleBlog(this)">Read More</button>
+                    <div class="blog-content">
+                        <p><strong>1. Identify Triggers</strong><br>Recognize what causes your stress and find ways to manage or avoid them.</p>
+                        <p><strong>2. Practice Deep Breathing</strong><br>Take slow, deep breaths to calm your nervous system.</p>
+                        <p><strong>3. Stay Active</strong><br>Physical activity releases endorphins that reduce stress.</p>
+                        <p><strong>4. Connect with Others</strong><br>Talk to friends, family, or a counselor about your feelings.</p>
+                        <p><strong>5. Get Enough Sleep</strong><br>Aim for 7-9 hours of quality sleep each night.</p>
+                    </div>
+                </div>
+
+                <!-- Blog 4 -->
+                <div class="blog-card">
+                    <span class="blog-tag">Prevention</span>
+                    <h3>Why Preventive Care Matters</h3>
+                    <p class="blog-meta">📅 July 2026 | ⏱️ 5 min read</p>
+                    <p class="blog-excerpt">Preventive care helps you stay healthy and catch potential health issues early.</p>
+                    <button class="btn-read-more" onclick="toggleBlog(this)">Read More</button>
+                    <div class="blog-content">
+                        <p><strong>1. Regular Check-ups</strong><br>Visit your doctor for routine check-ups to monitor your health.</p>
+                        <p><strong>2. Screenings & Tests</strong><br>Get recommended screenings based on your age and risk factors.</p>
+                        <p><strong>3. Vaccinations</strong><br>Stay up-to-date with vaccines to protect yourself and others.</p>
+                        <p><strong>4. Healthy Lifestyle</strong><br>Eat well, exercise, and avoid harmful habits like smoking.</p>
+                        <p><strong>5. Know Your Family History</strong><br>Understanding your family's health history can help you take preventive steps.</p>
+                    </div>
+                </div>
+
+                <!-- Blog 5 -->
+                <div class="blog-card">
+                    <span class="blog-tag">Lifestyle</span>
+                    <h3>Sleep Hygiene: How to Sleep Better</h3>
+                    <p class="blog-meta">📅 June 2026 | ⏱️ 4 min read</p>
+                    <p class="blog-excerpt">Good sleep is essential for health. Learn how to improve your sleep quality.</p>
+                    <button class="btn-read-more" onclick="toggleBlog(this)">Read More</button>
+                    <div class="blog-content">
+                        <p><strong>1. Consistent Schedule</strong><br>Go to bed and wake up at the same time every day.</p>
+                        <p><strong>2. Create a Routine</strong><br>Develop a relaxing pre-sleep routine to signal your body it's time to rest.</p>
+                        <p><strong>3. Limit Screens</strong><br>Avoid screens at least 30 minutes before bedtime.</p>
+                        <p><strong>4. Comfortable Environment</strong><br>Keep your bedroom cool, dark, and quiet for better sleep.</p>
+                        <p><strong>5. Avoid Caffeine</strong><br>Limit caffeine and heavy meals close to bedtime.</p>
+                    </div>
+                </div>
+
+                <!-- Blog 6 -->
+                <div class="blog-card">
+                    <span class="blog-tag">Wellness</span>
+                    <h3>Hydration: Why Water Matters</h3>
+                    <p class="blog-meta">📅 June 2026 | ⏱️ 3 min read</p>
+                    <p class="blog-excerpt">Staying hydrated is one of the simplest ways to support your overall health.</p>
+                    <button class="btn-read-more" onclick="toggleBlog(this)">Read More</button>
+                    <div class="blog-content">
+                        <p><strong>1. Drink Enough Water</strong><br>Aim for 8 glasses of water a day, more if you're active.</p>
+                        <p><strong>2. Eat Water-Rich Foods</strong><br>Include fruits and vegetables like watermelon, cucumber, and oranges.</p>
+                        <p><strong>3. Listen to Your Body</strong><br>Drink when you're thirsty and pay attention to signs of dehydration.</p>
+                        <p><strong>4. Carry a Water Bottle</strong><br>Keep water with you throughout the day as a reminder to drink.</p>
+                        <p><strong>5. Avoid Sugary Drinks</strong><br>Limit soda and sugary beverages — choose water instead.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DISCLAIMER ==================== -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-box">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <h3>Educational Disclaimer</h3>
+                    <p>This blog provides educational information only. It is not a substitute for professional medical advice. Always consult a qualified healthcare provider.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Want More Health Tips?</h2>
+                <p>Explore our Health Library for more information on various health topics.</p>
+                <div class="cta-buttons">
+                    <a href="./health-library.html" class="btn-primary">Visit Health Library</a>
+                    <a href="./contact.html" class="btn-secondary-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+        function toggleBlog(btn) {
+            const card = btn.closest('.blog-card');
+            const content = card.querySelector('.blog-content');
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                btn.textContent = 'Read More';
+            } else {
+                content.classList.add('open');
+                btn.textContent = 'Read Less';
+            }
+        }
+    </script>
+</body>
+                      </html>
