@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telehealth - Nexus Healthcare</title>
+    <meta name="description" content="Telehealth information, benefits of telemedicine, and digital health resources for remote healthcare.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .telehealth-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .telehealth-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .telehealth-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+        .telehealth-card .telehealth-icon {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .telehealth-card .telehealth-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--accent-glow);
+            color: var(--accent-teal);
+            margin-bottom: 12px;
+        }
+        .telehealth-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+        .telehealth-card .telehealth-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+        .telehealth-card .telehealth-details {
+            display: none;
+            padding-top: 16px;
+            border-top: 1px solid rgba(11, 59, 107, 0.06);
+        }
+        .telehealth-card .telehealth-details.open {
+            display: block;
+        }
+        .telehealth-card .telehealth-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .telehealth-card .telehealth-details strong {
+            color: var(--primary-navy);
+        }
+        .telehealth-card .btn-toggle {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 2px solid var(--accent-teal);
+            background: transparent;
+            color: var(--accent-teal);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        .telehealth-card .btn-toggle:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+        }
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .benefit-card {
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-teal);
+        }
+        .benefit-card .benefit-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .benefit-card h4 {
+            color: var(--primary-navy);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .benefit-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .tool-card {
+            background: var(--bg-white);
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-teal);
+        }
+        .tool-card .tool-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .tool-card h4 {
+            color: var(--primary-navy);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .tool-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .telehealth-grid {
+                grid-template-columns: 1fr;
+            }
+            .benefit-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .benefit-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./about-me.html" class="btn-nav-cta">About Me</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>📱 Telehealth</h1>
+                <p>Understanding telehealth, telemedicine, and digital health resources for remote healthcare.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TELEHEALTH CARDS ==================== -->
+    <section class="telehealth-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Telehealth</span>
+                <h2>Understanding Telehealth & Telemedicine</h2>
+                <p>Learn about remote healthcare services and digital health tools.</p>
+            </div>
+
+            <div class="telehealth-grid">
+                <!-- Card 1 -->
+                <div class="telehealth-card">
+                    <span class="telehealth-icon">📞</span>
+                    <span class="telehealth-tag">Telemedicine</span>
+                    <h3>What is Telemedicine?</h3>
+                    <p class="telehealth-desc">Understanding telemedicine and how it connects patients with healthcare providers remotely.</p>
+                    <button class="btn-toggle" onclick="toggleTelehealth(this)">Learn More</button>
+                    <div class="telehealth-details">
+                        <p><strong>What it is:</strong> Telemedicine is the practice of providing healthcare services remotely using technology like video calls, phone calls, and messaging.</p>
+                        <p><strong>How it works:</strong> Patients can consult with doctors, get prescriptions, and receive medical advice without visiting a clinic.</p>
+                        <p><strong>Benefits:</strong> Convenience, reduced travel time, lower costs, and accessibility for rural areas.</p>
+                        <p><strong>Technology:</strong> Video conferencing, mobile apps, and secure messaging platforms are used for telemedicine.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="telehealth-card">
+                    <span class="telehealth-icon">💻</span>
+                    <span class="telehealth-tag">Digital Health</span>
+                    <h3>Digital Health Tools</h3>
+                    <p class="telehealth-desc">Understanding digital health tools and how they support healthcare and wellness.</p>
+                    <button class="btn-toggle" onclick="toggleTelehealth(this)">Learn More</button>
+                    <div class="telehealth-details">
+                        <p><strong>What it is:</strong> Digital health tools include apps, wearable devices, and platforms that help monitor health and manage wellness.</p>
+                        <p><strong>Examples:</strong> Health tracking apps, fitness wearables, blood pressure monitors, and glucose monitors.</p>
+                        <p><strong>Benefits:</strong> Real-time health monitoring, personalized insights, and better health management.</p>
+                        <p><strong>Tips:</strong> Choose reliable tools and use them under professional guidance for accurate results.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="telehealth-card">
+                    <span class="telehealth-icon">🏥</span>
+                    <span class="telehealth-tag">Remote Care</span>
+                    <h3>Remote Patient Monitoring</h3>
+                    <p class="telehealth-desc">Understanding remote patient monitoring and its role in managing chronic conditions.</p>
+                    <button class="btn-toggle" onclick="toggleTelehealth(this)">Learn More</button>
+                    <div class="telehealth-details">
+                        <p><strong>What it is:</strong> Remote patient monitoring (RPM) uses technology to monitor patients' health outside of traditional healthcare settings.</p>
+                        <p><strong>Examples:</strong> Monitoring blood pressure, heart rate, glucose levels, and oxygen saturation remotely.</p>
+                        <p><strong>Benefits:</strong> Early detection of health issues, better management of chronic conditions, and reduced hospital visits.</p>
+                        <p><strong>Technology:</strong> Wearable devices, mobile apps, and secure data transmission platforms are used for RPM.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="telehealth-card">
+                    <span class="telehealth-icon">🌍</span>
+                    <span class="telehealth-tag">Accessibility</span>
+                    <h3>Telehealth for Rural Areas</h3>
+                    <p class="telehealth-desc">How telehealth is improving healthcare access in rural and underserved communities.</p>
+                    <button class="btn-toggle" onclick="toggleTelehealth(this)">Learn More</button>
+                    <div class="telehealth-details">
+                        <p><strong>What it is:</strong> Telehealth helps bridge the healthcare gap for people in remote areas who have limited access to healthcare facilities.</p>
+                        <p><strong>Benefits:</strong> Reduced travel time, faster consultations, access to specialists, and lower healthcare costs.</p>
+                        <p><strong>Examples:</strong> Virtual consultations, tele-radiology, tele-psychiatry, and health education via digital platforms.</p>
+                        <p><strong>Future:</strong> Telehealth is expanding rapidly, with more services becoming available to rural communities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BENEFITS ==================== -->
+    <section class="benefit-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Benefits</span>
+                <h2>Benefits of Telehealth</h2>
+                <p>Why telehealth is becoming an essential part of modern healthcare.</p>
+            </div>
+
+            <div class="benefit-grid">
+                <div class="benefit-card">
+                    <span class="benefit-icon">🚗</span>
+                    <h4>No Travel</h4>
+                    <p>Access healthcare from the comfort of your home without traveling.</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">⏰</span>
+                    <h4>Time Saving</h4>
+                    <p>Quick consultations without waiting rooms and travel time.</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">💰</span>
+                    <h4>Cost Effective</h4>
+                    <p>Lower healthcare costs and reduced travel expenses.</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">🩺</span>
+                    <h4>Better Access</h4>
+                    <p>Access to specialists and healthcare services from anywhere.</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">📊</span>
+                    <h4>Easy Monitoring</h4>
+                    <p>Track your health regularly using digital health tools.</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">🤝</span>
+                    <h4>Patient Engagement</h4>
+                    <p>Stay connected with healthcare providers for better health outcomes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TOOLS ==================== -->
+    <section class="tool-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Tools</span>
+                <h2>Digital Health Tools</h2>
+                <p>Examples of digital tools and platforms used in telehealth.</p>
+            </div>
+
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">📱</span>
+                    <h4>Health Apps</h4>
+                    <p>Mobile apps for tracking health, fitness, and wellness.</p>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">⌚</span>
+                    <h4>Wearable Devices</h4>
+                    <p>Smartwatches and fitness trackers for monitoring health metrics.</p>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🖥️</span>
+                    <h4>Video Platforms</h4>
+                    <p>Secure video conferencing for virtual consultations.</p>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📋</span>
+                    <h4>Patient Portals</h4>
+                    <p>Online platforms for accessing medical records and communicating with providers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DISCLAIMER ==================== -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-box">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <h3>Telehealth Disclaimer</h3>
+                    <p>This information is for educational purposes only. Telehealth should not replace emergency care. Always consult a qualified healthcare provider for medical advice, diagnosis, or treatment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Want to Learn More?</h2>
+                <p>Explore our Health Library for more health information and resources.</p>
+                <div class="cta-buttons">
+                    <a href="./health-library.html" class="btn-primary">Visit Health Library</a>
+                    <a href="./contact.html" class="btn-secondary-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="./medical-disclaimer.html">Medical Disclaimer</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+        function toggleTelehealth(btn) {
+            const card = btn.closest('.telehealth-card');
+            const details = card.querySelector('.telehealth-details');
+            if (details.classList.contains('open')) {
+                details.classList.remove('open');
+                btn.textContent = 'Learn More';
+            } else {
+                details.classList.add('open');
+                btn.textContent = 'Read Less';
+            }
+        }
+    </script>
+</body>
+                                                                                </html>
