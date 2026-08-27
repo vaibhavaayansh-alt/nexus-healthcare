@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Health - Nexus Healthcare</title>
+    <meta name="description" content="Senior health information, healthy aging tips, managing chronic conditions, and wellness for older adults.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .senior-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .senior-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .senior-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-teal);
+        }
+        .senior-card .senior-icon {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .senior-card .senior-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--accent-glow);
+            color: var(--accent-teal);
+            margin-bottom: 12px;
+        }
+        .senior-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+        .senior-card .senior-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+        .senior-card .senior-details {
+            display: none;
+            padding-top: 16px;
+            border-top: 1px solid rgba(11, 59, 107, 0.06);
+        }
+        .senior-card .senior-details.open {
+            display: block;
+        }
+        .senior-card .senior-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .senior-card .senior-details strong {
+            color: var(--primary-navy);
+        }
+        .senior-card .btn-toggle {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 2px solid var(--accent-teal);
+            background: transparent;
+            color: var(--accent-teal);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        .senior-card .btn-toggle:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+        }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .tip-card {
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .tip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-teal);
+        }
+        .tip-card .tip-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .tip-card h4 {
+            color: var(--primary-navy);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .tip-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .condition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .condition-card {
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .condition-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-teal);
+        }
+        .condition-card .condition-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .condition-card h4 {
+            color: var(--primary-navy);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .condition-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .senior-grid {
+                grid-template-columns: 1fr;
+            }
+            .tips-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .condition-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            .condition-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./about-me.html" class="btn-nav-cta">About Me</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>👴 Senior Health</h1>
+                <p>Comprehensive health information for healthy aging and wellness in older adults.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SENIOR HEALTH CARDS ==================== -->
+    <section class="senior-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Senior Health</span>
+                <h2>Understanding Senior Health Issues</h2>
+                <p>Learn about common health concerns affecting older adults and how to manage them.</p>
+            </div>
+
+            <div class="senior-grid">
+                <!-- Card 1 -->
+                <div class="senior-card">
+                    <span class="senior-icon">❤️</span>
+                    <span class="senior-tag">Heart Health</span>
+                    <h3>Heart Health for Seniors</h3>
+                    <p class="senior-desc">Understanding cardiovascular health and prevention tips for older adults.</p>
+                    <button class="btn-toggle" onclick="toggleSenior(this)">Learn More</button>
+                    <div class="senior-details">
+                        <p><strong>What it is:</strong> Heart health refers to the condition of the heart and blood vessels. As we age, the risk of heart disease increases.</p>
+                        <p><strong>Common issues:</strong> High blood pressure, heart disease, stroke, and cholesterol problems.</p>
+                        <p><strong>Prevention tips:</strong> Eat a heart-healthy diet, exercise regularly, manage stress, avoid smoking, and monitor blood pressure.</p>
+                        <p><strong>When to seek help:</strong> If you experience chest pain, shortness of breath, or dizziness.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="senior-card">
+                    <span class="senior-icon">🦴</span>
+                    <span class="senior-tag">Bone Health</span>
+                    <h3>Bone Health and Osteoporosis</h3>
+                    <p class="senior-desc">Understanding bone health, osteoporosis, and fracture prevention in seniors.</p>
+                    <button class="btn-toggle" onclick="toggleSenior(this)">Learn More</button>
+                    <div class="senior-details">
+                        <p><strong>What it is:</strong> Bone health refers to the strength and density of bones. Osteoporosis is a condition where bones become weak and fragile.</p>
+                        <p><strong>Common issues:</strong> Osteoporosis, fractures, joint pain, and arthritis.</p>
+                        <p><strong>Prevention tips:</strong> Eat calcium-rich foods, get vitamin D, exercise (weight-bearing), and avoid smoking.</p>
+                        <p><strong>When to seek help:</strong> If you experience frequent fractures, severe joint pain, or mobility issues.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="senior-card">
+                    <span class="senior-icon">🧠</span>
+                    <span class="senior-tag">Brain Health</span>
+                    <h3>Brain Health and Cognitive Function</h3>
+                    <p class="senior-desc">Understanding cognitive health, memory, and dementia prevention in seniors.</p>
+                    <button class="btn-toggle" onclick="toggleSenior(this)">Learn More</button>
+                    <div class="senior-details">
+                        <p><strong>What it is:</strong> Cognitive health involves memory, thinking, and decision-making abilities. Aging can affect these functions.</p>
+                        <p><strong>Common issues:</strong> Memory loss, dementia, Alzheimer's disease, and cognitive decline.</p>
+                        <p><strong>Prevention tips:</strong> Stay mentally active, socialize, exercise, eat a healthy diet, and manage stress.</p>
+                        <p><strong>When to seek help:</strong> If you notice significant memory loss or confusion.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="senior-card">
+                    <span class="senior-icon">😊</span>
+                    <span class="senior-tag">Mental Wellness</span>
+                    <h3>Mental Health and Wellness</h3>
+                    <p class="senior-desc">Understanding mental wellness, emotional health, and caregiver support for seniors.</p>
+                    <button class="btn-toggle" onclick="toggleSenior(this)">Learn More</button>
+                    <div class="senior-details">
+                        <p><strong>What it is:</strong> Mental wellness involves emotional, psychological, and social well-being. Seniors may face loneliness, depression, or anxiety.</p>
+                        <p><strong>Common issues:</strong> Depression, anxiety, loneliness, and grief.</p>
+                        <p><strong>Tips:</strong> Stay connected with family and friends, engage in hobbies, practice gratitude, and seek professional help when needed.</p>
+                        <p><strong>When to seek help:</strong> If you feel persistently sad, anxious, or lonely.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONDITION MANAGEMENT ==================== -->
+    <section class="condition-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Managing Conditions</span>
+                <h2>Common Chronic Conditions in Seniors</h2>
+                <p>Information about managing common chronic conditions in older adults.</p>
+            </div>
+
+            <div class="condition-grid">
+                <div class="condition-card">
+                    <span class="condition-icon">🫀</span>
+                    <h4>Diabetes</h4>
+                    <p>Monitor blood sugar, eat a balanced diet, exercise, and take prescribed medications.</p>
+                </div>
+                <div class="condition-card">
+                    <span class="condition-icon">🫁</span>
+                    <h4>Asthma & COPD</h4>
+                    <p>Avoid triggers, take medications as prescribed, and practice breathing exercises.</p>
+                </div>
+                <div class="condition-card">
+                    <span class="condition-icon">🦵</span>
+                    <h4>Arthritis</h4>
+                    <p>Stay active, apply heat/cold therapy, take prescribed medications, and manage weight.</p>
+                </div>
+                <div class="condition-card">
+                    <span class="condition-icon">🧠</span>
+                    <h4>Memory Loss</h4>
+                    <p>Stay mentally active, socialize, exercise, and maintain a healthy lifestyle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TIPS ==================== -->
+    <section class="tips-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Healthy Aging</span>
+                <h2>Tips for Healthy Aging</h2>
+                <p>Simple daily habits for maintaining health and wellness in older age.</p>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <span class="tip-icon">🥗</span>
+                    <h4>Eat Healthy</h4>
+                    <p>Eat a balanced diet rich in fruits, vegetables, lean proteins, and whole grains.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">🏃</span>
+                    <h4>Stay Active</h4>
+                    <p>Exercise regularly to maintain strength, flexibility, and heart health.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">😴</span>
+                    <h4>Sleep Well</h4>
+                    <p>Aim for 7-9 hours of quality sleep each night for optimal health.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">🧠</span>
+                    <h4>Stay Mentally Active</h4>
+                    <p>Read, solve puzzles, and learn new skills to keep your brain active.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">🤝</span>
+                    <h4>Stay Social</h4>
+                    <p>Connect with family, friends, and community groups to prevent loneliness.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">🩺</span>
+                    <h4>Regular Checkups</h4>
+                    <p>Visit your doctor regularly for health screenings and checkups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DISCLAIMER ==================== -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-box">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <h3>Medical Disclaimer</h3>
+                    <p>This information is for educational purposes only. Consult a qualified healthcare professional for personalized medical advice, diagnosis, or treatment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Want to Learn More?</h2>
+                <p>Explore our Health Library for more health information and resources.</p>
+                <div class="cta-buttons">
+                    <a href="./health-library.html" class="btn-primary">Visit Health Library</a>
+                    <a href="./contact.html" class="btn-secondary-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./rural-care.html">Rural Care</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="./medical-disclaimer.html">Medical Disclaimer</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+        function toggleSenior(btn) {
+            const card = btn.closest('.senior-card');
+            const details = card.querySelector('.senior-details');
+            if (details.classList.contains('open')) {
+                details.classList.remove('open');
+                btn.textContent = 'Learn More';
+            } else {
+                details.classList.add('open');
+                btn.textContent = 'Read Less';
+            }
+        }
+    </script>
+</body>
+                  </html>
