@@ -1,49 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Aayansh Vaibhav - Founder of Nexus Healthcare</title>
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-body{font-family:Arial; max-width:800px; margin:auto; padding:20px; line-height:1.6}
-.hero{text-align:center; padding:40px 20px; background:#f0f9ff; border-radius:20px}
-.hero img{width:150px; height:150px; border-radius:50%; object-fit:cover; border:5px solid #0ea5e9}
-.badge{background:#0ea5e9; color:white; padding:5px 15px; border-radius:20px; display:inline-block; margin:5px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Aayansh Vaibhav - Founder Nexus Healthcare</title>
+    <meta name="description" content="Aayansh Vaibhav - Founder of Nexus Healthcare, student developer from Muzaffarpur, Bihar.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, #0B3B6B 0%, #1A6FA0 100%);
+            color: #FFFFFF;
+            padding: 80px 0 60px;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
+        }
+        .about-hero h1 {
+            color: #FFFFFF;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+        }
+        .about-hero .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 8px;
+        }
+        .profile-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+        .profile-image {
+            text-align: center;
+        }
+        .profile-image .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-glow), var(--bg-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 5rem;
+            border: 4px solid var(--accent-teal);
+            box-shadow: var(--shadow-md);
+        }
+        .profile-image .social-links {
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .profile-image .social-links a {
+            font-size: 1.8rem;
+            transition: var(--transition);
+            opacity: 0.7;
+        }
+        .profile-image .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-4px);
+        }
+        .profile-bio h2 {
+            color: var(--primary-navy);
+            margin-bottom: 4px;
+        }
+        .profile-bio .role {
+            color: var(--accent-teal);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        .profile-bio p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .highlight-box {
+            background: var(--bg-light);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--accent-teal);
+            margin: 12px 0;
+        }
+        .highlight-box strong {
+            color: var(--primary-navy);
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .info-item {
+            background: var(--bg-white);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(11, 59, 107, 0.06);
+            text-align: center;
+        }
+        .info-item .info-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-item .info-value {
+            font-weight: 600;
+            color: var(--primary-navy);
+            font-size: 1.05rem;
+        }
+        .achievement-badge {
+            display: inline-block;
+            background: #FFF3E0;
+            color: #E65100;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 4px 4px 4px 0;
+        }
+        @media (max-width: 768px) {
+            .profile-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .profile-bio {
+                text-align: center;
+            }
+            .highlight-box {
+                text-align: left;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-image .avatar {
+                width: 150px;
+                height: 150px;
+                font-size: 4rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="hero">
-<img src="assets/images/profile.jpg" alt="Aayansh Vaibhav">
-<h1>Aayansh Vaibhav</h1>
-<p><span class="badge">Founder, Owner & Developer</span> <span class="badge">Nexus Healthcare</span></p>
-<p><b>Youngest Healthcare Innovator from Muzaffarpur, Bihar</b></p>
-</div>
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#0B3B6B" stroke="#0B3B6B" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#0B3B6B" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#00B4D8"/>
+                            <path d="M16 16L20 12L24 16L20 20L16 16Z" fill="#00B4D8" opacity="0.5"/>
+                            <circle cx="20" cy="28" r="2" fill="#00B4D8" opacity="0.6"/>
+                        </svg>
+                        <span class="logo-text">NEXUS <span>HEALTHCARE</span></span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./health-library.html">Health Library</a></li>
+                    <li><a href="./doctors.html">Doctors</a></li>
+                    <li><a href="./emergency.html">Emergency</a></li>
+                    <li><a href="./rural-care.html">Rural Care</a></li>
+                    <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                    <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./about-me.html" class="btn-nav-cta">About Me</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<h2>About Me</h2>
-<p>Hello! I am <b>Aayansh Vaibhav</b>. I was born on <b>5th July 2013</b> in <b>Muzaffarpur, Bihar</b>. I am currently <b>13 years old</b> and studying in <b>Class 8 at Shemford Futuristic School, Muzaffarpur</b>.</p>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>👋 Aayansh Vaibhav</h1>
+            <p class="subtitle">Founder, Owner & Developer of Nexus Healthcare</p>
+        </div>
+    </section>
 
-<p>From a very young age, I was passionate about technology and healthcare. I wanted to solve the real problems of our healthcare system in India, where patients struggle to find the right doctor, medicine, and hospital at the right time.</p>
+    <!-- ==================== PROFILE SECTION ==================== -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <div class="avatar">👨‍💻</div>
+                    <div class="social-links">
+                        <a href="https://instagram.com/your-username" target="_blank" aria-label="Instagram">📸</a>
+                        <a href="https://linkedin.com/in/your-username" target="_blank" aria-label="LinkedIn">💼</a>
+                        <a href="https://github.com/your-username" target="_blank" aria-label="GitHub">🐙</a>
+                    </div>
+                </div>
 
-<h2>My Mission - Nexus Healthcare</h2>
-<p>I am the <b>Founder, Owner, and Developer of Nexus Healthcare</b> - An AI-powered Smart Healthcare Ecosystem.</p>
-<p><b>Nexus connects 4 pillars:</b> Patient, Doctor, Pharmacy & Admin in one platform. It helps patients find doctors, book appointments, get AI medicine suggestions, and order medicines online.</p>
+                <div class="profile-bio">
+                    <h2>Aayansh Vaibhav</h2>
+                    <p class="role">🚀 Founder, Owner & Developer | Nexus Healthcare</p>
 
-<h2>Achievements & Vision</h2>
-<ul>
-<li>Developed a complete Healthcare Platform at the age of 13</li>
-<li>Skills: HTML, CSS, JavaScript, AI Integration, GitHub</li>
-<li>Vision: To make healthcare accessible, affordable and digital for every Indian</li>
-<li>Aspiring World Record Holder - Youngest Healthcare Website Developer</li>
-</ul>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">📅 Born</div>
+                            <div class="info-value">5th July 2013</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">📍 From</div>
+                            <div class="info-value">Muzaffarpur, Bihar</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">🏫 School</div>
+                            <div class="info-value">Shemford Futuristic School</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">📚 Class</div>
+                            <div class="info-value">Class 8</div>
+                        </div>
+                    </div>
 
-<h2>Contact</h2>
-<p>Email: contact@nexushealthcare.in (Demo)<br>
-Location: Muzaffarpur, Bihar, India</p>
+                    <div class="highlight-box">
+                        <strong>🌟 Youngest Healthcare Platform Founder</strong>
+                        <p style="margin: 4px 0 0 0; font-size: 0.95rem;">At just 13 years old, I built Nexus Healthcare — a complete web-based digital health platform to spread healthcare awareness.</p>
+                    </div>
 
-<br>
-<a href="index.html" style="background:#0ea5e9; color:white; padding:12px 25px; text-decoration:none; border-radius:10px;">← Back to Home</a>
+                    <p><strong>My Journey</strong><br>
+                    I am a student developer from Muzaffarpur, Bihar, currently studying in Class 8 at Shemford Futuristic School. My passion for technology and coding started at a young age, and I believe that innovation can solve real-world problems.</p>
 
+                    <p><strong>Why Nexus Healthcare?</strong><br>
+                    I created Nexus Healthcare to connect people with better healthcare information and resources. This project is my way of contributing to society and making healthcare awareness accessible to everyone — especially in rural and underserved communities. From designing the website to writing every line of code, I have built this platform from scratch.</p>
+
+                    <p><strong>My Vision</strong><br>
+                    I want to use technology to make a positive impact on people's lives. Whether it's coding a website, learning new technologies, or working on meaningful projects, I am always eager to grow, learn, and build something that truly matters.</p>
+
+                    <div style="margin-top: 16px;">
+                        <span class="achievement-badge">🏆 Youngest Founder</span>
+                        <span class="achievement-badge">💻 Web Developer</span>
+                        <span class="achievement-badge">🌍 Healthcare Advocate</span>
+                        <span class="achievement-badge">📚 Student Innovator</span>
+                    </div>
+
+                    <div style="margin-top: 16px; padding: 12px 16px; background: #FFF8E1; border-radius: var(--radius-sm); border-left: 4px solid #FFC107;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #6D4C00;">
+                            ⚠️ <strong>Note:</strong> Nexus Healthcare is an educational project created to spread health awareness. It does not replace professional medical advice.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <path d="M20 4L4 12L20 20L36 12L20 4Z" fill="#00B4D8" stroke="#00B4D8" stroke-width="2"/>
+                            <path d="M4 12L4 28L20 36L36 28L36 12" stroke="#00B4D8" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4" fill="#FFFFFF"/>
+                        </svg>
+                        <span>NEXUS HEALTHCARE</span>
+                    </div>
+                    <p>"Connecting People to Better Healthcare."</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                        <li><a href="./doctors.html">Doctors</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="./about-me.html">About Me</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Health Resources</h4>
+                    <ul>
+                        <li><a href="./health-library.html">Health Library</a></li>
+                        <li><a href="./emergency.html">Emergency & First Aid</a></li>
+                        <li><a href="./vaccination-guide.html">Vaccination Guide</a></li>
+                        <li><a href="./mental-health.html">Mental Health</a></li>
+                        <li><a href="./nutrition-guide.html">Nutrition Guide</a></li>
+                        <li><a href="./health-tips.html">Daily Health Tips</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="./rural-care.html">Rural Healthcare</a></li>
+                        <li><a href="./government-schemes.html">Gov. Schemes</a></li>
+                        <li><a href="./ayushman-bharat.html">Ayushman Bharat</a></li>
+                        <li><a href="./women-health.html">Women's Health</a></li>
+                        <li><a href="./child-health.html">Child Health</a></li>
+                        <li><a href="./senior-health.html">Senior Health</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="./blog.html">Health Blog</a></li>
+                        <li><a href="./telehealth.html">Telehealth</a></li>
+                        <li><a href="./medical-disclaimer.html">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="./medical-disclaimer.html">Medical Disclaimer</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus Healthcare. All rights reserved. Educational Project.</p>
+                <p class="footer-disclaimer">⚠️ Nexus Healthcare is an educational project and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP BUTTON ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script src="./assets/js/main.js"></script>
 </body>
-</html>
+  </html>
